@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Serviciu>
+
+
+@{
+    ViewBag.Title = "Servicii";
+}
+<br/>
+<h2 style="text-align: center;">Serviciile Noastre</h2>
+<br />
+<div>
+    <img src="~/Images/servicii.jpg"  width: 460px; height: 400px; padding: 20px;">
+
+</div>
+<div style="display: flex; justify-content: space-around; background-color: #eef6f6; padding: 20px;">
+    @foreach (var item in Model)
+    {
+        <div style="flex-grow: 1; align-items: center; text-align: center; margin: 0 10px; background-color:deepskyblue; color: white; border-radius: 15px; padding: 20px;">
+            <div style="margin-top: 10px; font-size: 18px; font-weight: bold;">@Html.ActionLink(item.Denumire, item.Descriere, null, new { style = "color: white; font-size: 18px; font-weight: bold; text-decoration: none;" })</div>
+        </div>
+    }
+</div>
+
+
+
+
+
+
+
+

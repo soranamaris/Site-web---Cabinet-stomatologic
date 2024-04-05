@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Stoma Dent</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <meta name="description" content="The description of my page" />
+</head>
+<body style="background-color:white">
+    <br />
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: lightskyblue">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Stoma Dent", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse" style="background-color:lightskyblue">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Acasa", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Despre noi", "About", "Home")</li>
+                    <li>@Html.ActionLink("Servicii", "Servicii", "Servicii")</li>
+                    <li>@Html.ActionLink("Tarife", "Tarife", "Tarife")</li>
+                    <li>@Html.ActionLink("Testimoniale", "Testimoniale", "Testimoniale")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li class="btn btn-primary btn-lg" style="background-color:skyblue">@Html.ActionLink("Programare", "Index", "Prog")</li>
+
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+
+    </div>
+    @*<footer>
+            <div class="container body-content">
+
+                <div class="row">
+                    <div class="col-md-3 col-xs-6">
+                        <h5>Contact</h5>
+                        <h6>Adresa:</h6>
+                        <p>Calea Floresti, nr.6,Cluj-Napoca	</p>
+
+                        <h6>Telefon:</h6>
+                        <p>
+                            031 200 70 30 <br />
+                            0730 123 324
+                        </p>
+
+                        <h6>E-mail:</h6>
+                        <p><a href="mailto:office@stomadent.ro">office@stomadent.ro</a></p>
+
+                        <h6>Fax:</h6>
+                        <p>021 317 21 31</p>
+                    </div>
+                    <div class="col-md-3 col-xs-6">
+                        <h5>Program</h5>
+                        <h6>Luni-Vineri</h6>
+                        <p>9:00 - 22:00</p>
+
+                        <h6>Sambata</h6>
+                        <p>Inchis</p>
+
+                        <h6>Duminica</h6>
+                        <p>Inchis</p>
+
+                    </div>
+
+
+                    <p>&copy; @DateTime.Now.Year - Stoma Dent</p>
+
+                </div>
+
+            </div>
+        </footer>*@
+    <footer style="background-color: #f8f9fa; padding: 30px 0; margin-top: 50px;">
+        <div class="container body-content">
+            <div class="row">
+                <div class="col-md-3 col-xs-6">
+                    <h5 style="color: #333;">Contact</h5>
+                    <address>
+                        <p><strong>Adresa:</strong><br>Calea Floresti, nr.6, Cluj-Napoca</p>
+                        <p><strong>Telefon:</strong><br>031 200 70 30 <br>0730 123 324</p>
+                        <p><strong>E-mail:</strong><br><a href="mailto:office@stomadent.ro" style="color: #007bff;">office@stomadent.ro</a></p>
+                        <p><strong>Fax:</strong><br>021 317 21 31</p>
+                    </address>
+                </div>
+                <div class="col-md-3 col-xs-6">
+                    <h5 style="color: #333;">Program</h5>
+                    <ul style="list-style-type: none; padding: 0;">
+                        <li><strong>Luni-Vineri:</strong> 9:00 - 22:00</li>
+                        <li><strong>Sâmbătă:</strong> Închis</li>
+                        <li><strong>Duminică:</strong> Închis</li>
+                    </ul>
+                </div>
+            </div>
+            <hr style="border-top: 1px solid #ddd;">
+            <p class="text-center">&copy; @DateTime.Now.Year - Stoma Dent</p>
+        </div>
+    </footer>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+
+
+</html>

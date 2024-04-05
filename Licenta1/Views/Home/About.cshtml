@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "Bine ați venit la Stoma Dent!";
+}
+<h2 style="text-align: center;color: cornflowerblue">@ViewBag.Title </h2>
+<h3 style="text-align: center;color: cornflowerblue">@ViewBag.Message</h3>
+
+
+<body>
+    <div style="font-family: Arial, sans-serif; background-color: #f8f9fa; color: #333; margin: 0; padding: 0;">
+        <div style="background-color: #fff; padding: 20px; max-width: 1200px; margin: 0 auto;">
+            <div class="row">
+                <div class="col-md-6">
+                    
+
+                    <p style="text-align: justify;">
+                        La Stoma Dent, ne angajăm să oferim servicii stomatologice de cea mai înaltă calitate într-un mediu prietenos și profesionist. Suntem dedicați să îmbunătățim sănătatea orală și să transformăm zâmbetele pacienților noștri prin soluții personalizate și tehnologie avansată.
+                    </p>
+
+                    <p style="text-align: justify;">
+                        Echipa noastră este formată din medici stomatologi specializați și experimentați, care pun pasiune și profesionalism în fiecare tratament. Fie că aveți nevoie de o consultație de rutină, de tratamente estetice sau de intervenții complexe, vă asigurăm că veți primi îngrijirea de care aveți nevoie și meritați.
+                    </p>
+
+                    <p style="text-align: justify;">
+                        La Stoma Dent, punem accent pe comunicare deschisă și transparență. Ne dorim ca fiecare pacient să înțeleagă complet opțiunile de tratament disponibile și să fie parte activă în deciziile privind sănătatea sa orală. În plus, ne străduim să facem experiența dumneavoastră la dentist cât mai confortabilă și relaxantă posibil.
+                    </p>
+
+                    <p style="text-align: justify;">
+                        Suntem aici pentru a vă ajuta să vă mențineți zâmbetul sănătos și strălucitor pentru întreaga viață. Programați-vă o consultație astăzi și experimentați diferența pe care o poate face Stoma Dent în sănătatea și frumusețea zâmbetului dumneavoastră!
+                    </p>
+
+                    <p style="text-align: justify;">
+                        Pentru programări sau întrebări suplimentare, nu ezitați să ne contactați. Echipa noastră este aici pentru dumneavoastră!
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <div class="image-container" style="position: relative; max-width: 400px; margin: 0 auto; overflow: hidden;">
+                        <img src="~/Images/cabinet.jpg" alt="Imaginea 1" class="image" style="display: inline-block; width: 100%; vertical-align: middle; max-width: 100%;">
+                        <img src="~/Images/cabinet1.JPG" alt="Imaginea 2" class="image" style="display: none; width: 100%; vertical-align: middle; max-width: 100%;">
+                        <img src="~/Images/stomatologi.jpg" alt="Imaginea 3" class="image" style="display: none; width: 100%; vertical-align: middle; max-width: 100%;">
+                        <div class="navigation" style="position: absolute; top: 50%; transform: translateY(-50%); width: 100%;">
+                            <button class="prev" onclick="changeImage(-1)" style="background-color: rgba(0, 0, 0, 0.5); color: white; border: none; padding: 10px; cursor: pointer; float: left;">&#10094;</button>
+                            <button class="next" onclick="changeImage(1)" style="background-color: rgba(0, 0, 0, 0.5); color: white; border: none; padding: 10px; cursor: pointer; float: right;">&#10095;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentImageIndex = 0;
+        const images = document.querySelectorAll('.image');
+
+        function showImage(index) {
+            images.forEach(image => image.style.display = 'none');
+            images[index].style.display = 'inline-block';
+        }
+
+        function changeImage(n) {
+            currentImageIndex += n;
+            if (currentImageIndex >= images.length) {
+                currentImageIndex = 0;
+            } else if (currentImageIndex < 0) {
+                currentImageIndex = images.length - 1;
+            }
+            showImage(currentImageIndex);
+        }
+
+        setInterval(function () {
+            changeImage(1);
+        }, 3000);
+    </script>
+
+
+</body>

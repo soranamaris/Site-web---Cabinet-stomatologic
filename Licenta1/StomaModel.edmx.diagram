@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c3dc1f5749334f5982f2d915bc3b0ac5" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Procedura" Width="1.5" PointX="0.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Programare" Width="2.125" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ServiciuProcedura" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Serviciu" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Testimonial" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_dbo_ServiciuProceduras_dbo_Proceduras_Procedura_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_dbo_Programares_dbo_ServiciuProceduras_ServiciuProcedura_ServiciuProceduraID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_dbo_ServiciuProceduras_dbo_Servicius_Serviciu_ServiciuID" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.AspNetRole" Width="1.5" PointX="8.25" PointY="10" />
+        <EntityTypeShape EntityType="Model.AspNetUser" Width="1.5" PointX="7.5" PointY="4.625" />
+        <AssociationConnector Association="Model.FK_dbo_Programares_dbo_AspNetUsers_ApplicationUser_Id" />
+        <AssociationConnector Association="Model.FK_dbo_Programares_dbo_AspNetUsers_ApplicationUser1_Id" />
+        <AssociationConnector Association="Model.FK_dbo_Testimonials_dbo_AspNetUsers_ApplicationUser_Id" />
+        <AssociationConnector Association="Model.AspNetUserRoles" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

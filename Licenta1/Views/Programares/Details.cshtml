@@ -1,0 +1,58 @@
+﻿@model Licenta1.Programare
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Programare</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PacientAnonim)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PacientAnonim)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicationUser_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationUser_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicationUser1_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationUser1_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ServiciuProcedura.ServiciuProceduraID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServiciuProcedura.ServiciuProceduraID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProgramareID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

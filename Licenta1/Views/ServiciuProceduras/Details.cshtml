@@ -1,0 +1,34 @@
+﻿@model ServiciuProcedura
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ServiciuProcedura</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Serviciu.Denumire)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Serviciu.Denumire)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Procedura.Denumire)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Procedura.Denumire)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ServiciuProceduraID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

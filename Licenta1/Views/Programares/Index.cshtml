@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Licenta1.Programare>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Data)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PacientAnonim)
+        </th>
+        <th>
+           
+            @Html.DisplayNameFor(model => model.ApplicationUser_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApplicationUser1_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServiciuProcedura.Procedura.Denumire)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Data)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PacientAnonim)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AspNetUser.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AspNetUser1.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ServiciuProcedura.Procedura.Denumire)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ProgramareID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ProgramareID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProgramareID })
+        </td>
+    </tr>
+}
+
+</table>

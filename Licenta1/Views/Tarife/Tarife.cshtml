@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Licenta1.Models.TarifViewModel>
+
+@{
+    ViewBag.Title = "Tarife";
+    
+}
+<br />
+<body>
+
+    <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa; color: #333; margin: 0; padding: 0;">
+        <div style="max-width: 900px; margin: 0 auto; padding: 20px; background-color: #fff*;border-radius: 20px;box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);">
+            <h2 style="text-align: center; color: #4CAF50; margin-bottom: 10px;">Tarife</h2>
+
+            @foreach (var item in Model)
+            {
+                <div style="margin-bottom: 20px;">
+                    <div style="font-size: 20px; color: #4CAF50; margin-bottom: 10px;">@Html.DisplayFor(modelItem => item.DenumireServiciu)</div>
+                    @foreach (var item1 in item.Procedura)
+                    {
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-left: 20px; color: #555;">
+                            <div style="font-weight: bold; margin-bottom: 5px;">@Html.DisplayFor(i => item1.Denumire)</div>
+                            <div style="color: #888;">@Html.DisplayFor(i => item1.Pret)</div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+
+</body>
+

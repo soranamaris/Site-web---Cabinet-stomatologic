@@ -1,0 +1,552 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Nume" Type="nvarchar(max)" />
+          <Property Name="Prenume" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Proceduras">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Denumire" Type="nvarchar(max)" />
+          <Property Name="Pret" Type="int" Nullable="false" />
+          <Property Name="Descriere" Type="nvarchar(max)" />
+          <Property Name="Durata" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Programares">
+          <Key>
+            <PropertyRef Name="ProgramareID" />
+          </Key>
+          <Property Name="ProgramareID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Data" Type="datetime" Nullable="false" />
+          <Property Name="PacientAnonim" Type="nvarchar(max)" />
+          <Property Name="ApplicationUser_Id" Type="nvarchar" MaxLength="128" />
+          <Property Name="ApplicationUser1_Id" Type="nvarchar" MaxLength="128" />
+          <Property Name="ServiciuProcedura_ServiciuProceduraID" Type="int" />
+        </EntityType>
+        <EntityType Name="ServiciuProceduras">
+          <Key>
+            <PropertyRef Name="ServiciuProceduraID" />
+          </Key>
+          <Property Name="ServiciuProceduraID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Procedura_Id" Type="int" />
+          <Property Name="Serviciu_ServiciuID" Type="int" />
+        </EntityType>
+        <EntityType Name="Servicius">
+          <Key>
+            <PropertyRef Name="ServiciuID" />
+          </Key>
+          <Property Name="ServiciuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Denumire" Type="nvarchar(max)" />
+          <Property Name="Descriere" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Testimonials">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Data" Type="datetime" />
+          <Property Name="Descriere" Type="nvarchar(max)" />
+          <Property Name="Validat" Type="bit" Nullable="false" />
+          <Property Name="ApplicationUser_Id" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Programares_dbo_AspNetUsers_ApplicationUser_Id">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Programares" Type="Self.Programares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Programares">
+              <PropertyRef Name="ApplicationUser_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Programares_dbo_AspNetUsers_ApplicationUser1_Id">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Programares" Type="Self.Programares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Programares">
+              <PropertyRef Name="ApplicationUser1_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Programares_dbo_ServiciuProceduras_ServiciuProcedura_ServiciuProceduraID">
+          <End Role="ServiciuProceduras" Type="Self.ServiciuProceduras" Multiplicity="0..1" />
+          <End Role="Programares" Type="Self.Programares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiciuProceduras">
+              <PropertyRef Name="ServiciuProceduraID" />
+            </Principal>
+            <Dependent Role="Programares">
+              <PropertyRef Name="ServiciuProcedura_ServiciuProceduraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ServiciuProceduras_dbo_Proceduras_Procedura_Id">
+          <End Role="Proceduras" Type="Self.Proceduras" Multiplicity="0..1" />
+          <End Role="ServiciuProceduras" Type="Self.ServiciuProceduras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proceduras">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiciuProceduras">
+              <PropertyRef Name="Procedura_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ServiciuProceduras_dbo_Servicius_Serviciu_ServiciuID">
+          <End Role="Servicius" Type="Self.Servicius" Multiplicity="0..1" />
+          <End Role="ServiciuProceduras" Type="Self.ServiciuProceduras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicius">
+              <PropertyRef Name="ServiciuID" />
+            </Principal>
+            <Dependent Role="ServiciuProceduras">
+              <PropertyRef Name="Serviciu_ServiciuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Testimonials_dbo_AspNetUsers_ApplicationUser_Id">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Testimonials" Type="Self.Testimonials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Testimonials">
+              <PropertyRef Name="ApplicationUser_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proceduras" EntityType="Self.Proceduras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Programares" EntityType="Self.Programares" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiciuProceduras" EntityType="Self.ServiciuProceduras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Servicius" EntityType="Self.Servicius" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Testimonials" EntityType="Self.Testimonials" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Programares_dbo_AspNetUsers_ApplicationUser_Id" Association="Self.FK_dbo_Programares_dbo_AspNetUsers_ApplicationUser_Id">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Programares" EntitySet="Programares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Programares_dbo_AspNetUsers_ApplicationUser1_Id" Association="Self.FK_dbo_Programares_dbo_AspNetUsers_ApplicationUser1_Id">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Programares" EntitySet="Programares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Programares_dbo_ServiciuProceduras_ServiciuProcedura_ServiciuProceduraID" Association="Self.FK_dbo_Programares_dbo_ServiciuProceduras_ServiciuProcedura_ServiciuProceduraID">
+            <End Role="ServiciuProceduras" EntitySet="ServiciuProceduras" />
+            <End Role="Programares" EntitySet="Programares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ServiciuProceduras_dbo_Proceduras_Procedura_Id" Association="Self.FK_dbo_ServiciuProceduras_dbo_Proceduras_Procedura_Id">
+            <End Role="Proceduras" EntitySet="Proceduras" />
+            <End Role="ServiciuProceduras" EntitySet="ServiciuProceduras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ServiciuProceduras_dbo_Servicius_Serviciu_ServiciuID" Association="Self.FK_dbo_ServiciuProceduras_dbo_Servicius_Serviciu_ServiciuID">
+            <End Role="Servicius" EntitySet="Servicius" />
+            <End Role="ServiciuProceduras" EntitySet="ServiciuProceduras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Testimonials_dbo_AspNetUsers_ApplicationUser_Id" Association="Self.FK_dbo_Testimonials_dbo_AspNetUsers_ApplicationUser_Id">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Testimonials" EntitySet="Testimonials" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Procedura">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Denumire" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Pret" Type="Int32" Nullable="false" />
+          <Property Name="Descriere" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Durata" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ServiciuProceduras" Relationship="Self.FK_dbo_ServiciuProceduras_dbo_Proceduras_Procedura_Id" FromRole="Proceduras" ToRole="ServiciuProceduras" />
+        </EntityType>
+        <EntityType Name="Programare">
+          <Key>
+            <PropertyRef Name="ProgramareID" />
+          </Key>
+          <Property Name="ProgramareID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PacientAnonim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ApplicationUser_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ApplicationUser1_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ServiciuProcedura_ServiciuProceduraID" Type="Int32" />
+          <NavigationProperty Name="ServiciuProcedura" Relationship="Self.FK_dbo_Programares_dbo_ServiciuProceduras_ServiciuProcedura_ServiciuProceduraID" FromRole="Programares" ToRole="ServiciuProceduras" />
+          <NavigationProperty Name="AspNetUser" Relationship="Model.FK_dbo_Programares_dbo_AspNetUsers_ApplicationUser_Id" FromRole="Programare" ToRole="AspNetUser" />
+          <NavigationProperty Name="AspNetUser1" Relationship="Model.FK_dbo_Programares_dbo_AspNetUsers_ApplicationUser1_Id" FromRole="Programare" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="ServiciuProcedura">
+          <Key>
+            <PropertyRef Name="ServiciuProceduraID" />
+          </Key>
+          <Property Name="ServiciuProceduraID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Procedura_Id" Type="Int32" />
+          <Property Name="Serviciu_ServiciuID" Type="Int32" />
+          <NavigationProperty Name="Procedura" Relationship="Self.FK_dbo_ServiciuProceduras_dbo_Proceduras_Procedura_Id" FromRole="ServiciuProceduras" ToRole="Proceduras" />
+          <NavigationProperty Name="Programares" Relationship="Self.FK_dbo_Programares_dbo_ServiciuProceduras_ServiciuProcedura_ServiciuProceduraID" FromRole="ServiciuProceduras" ToRole="Programares" />
+          <NavigationProperty Name="Serviciu" Relationship="Self.FK_dbo_ServiciuProceduras_dbo_Servicius_Serviciu_ServiciuID" FromRole="ServiciuProceduras" ToRole="Servicius" />
+        </EntityType>
+        <EntityType Name="Serviciu">
+          <Key>
+            <PropertyRef Name="ServiciuID" />
+          </Key>
+          <Property Name="ServiciuID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Denumire" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Descriere" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ServiciuProceduras" Relationship="Self.FK_dbo_ServiciuProceduras_dbo_Servicius_Serviciu_ServiciuID" FromRole="Servicius" ToRole="ServiciuProceduras" />
+        </EntityType>
+        <EntityType Name="Testimonial">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Data" Type="DateTime" Precision="3" />
+          <Property Name="Descriere" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Validat" Type="Boolean" Nullable="false" />
+          <Property Name="ApplicationUser_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Model.FK_dbo_Testimonials_dbo_AspNetUsers_ApplicationUser_Id" FromRole="Testimonial" ToRole="AspNetUser" />
+        </EntityType>
+        <Association Name="FK_dbo_ServiciuProceduras_dbo_Proceduras_Procedura_Id">
+          <End Role="Proceduras" Type="Self.Procedura" Multiplicity="0..1" />
+          <End Role="ServiciuProceduras" Type="Self.ServiciuProcedura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proceduras">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiciuProceduras">
+              <PropertyRef Name="Procedura_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Programares_dbo_ServiciuProceduras_ServiciuProcedura_ServiciuProceduraID">
+          <End Role="ServiciuProceduras" Type="Self.ServiciuProcedura" Multiplicity="0..1" />
+          <End Role="Programares" Type="Self.Programare" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiciuProceduras">
+              <PropertyRef Name="ServiciuProceduraID" />
+            </Principal>
+            <Dependent Role="Programares">
+              <PropertyRef Name="ServiciuProcedura_ServiciuProceduraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ServiciuProceduras_dbo_Servicius_Serviciu_ServiciuID">
+          <End Role="Servicius" Type="Self.Serviciu" Multiplicity="0..1" />
+          <End Role="ServiciuProceduras" Type="Self.ServiciuProcedura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicius">
+              <PropertyRef Name="ServiciuID" />
+            </Principal>
+            <Dependent Role="ServiciuProceduras">
+              <PropertyRef Name="Serviciu_ServiciuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StomaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Proceduras" EntityType="Self.Procedura" />
+          <EntitySet Name="Programares" EntityType="Self.Programare" />
+          <EntitySet Name="ServiciuProceduras" EntityType="Self.ServiciuProcedura" />
+          <EntitySet Name="Servicius" EntityType="Self.Serviciu" />
+          <EntitySet Name="Testimonials" EntityType="Self.Testimonial" />
+          <AssociationSet Name="FK_dbo_ServiciuProceduras_dbo_Proceduras_Procedura_Id" Association="Self.FK_dbo_ServiciuProceduras_dbo_Proceduras_Procedura_Id">
+            <End Role="Proceduras" EntitySet="Proceduras" />
+            <End Role="ServiciuProceduras" EntitySet="ServiciuProceduras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Programares_dbo_ServiciuProceduras_ServiciuProcedura_ServiciuProceduraID" Association="Self.FK_dbo_Programares_dbo_ServiciuProceduras_ServiciuProcedura_ServiciuProceduraID">
+            <End Role="ServiciuProceduras" EntitySet="ServiciuProceduras" />
+            <End Role="Programares" EntitySet="Programares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ServiciuProceduras_dbo_Servicius_Serviciu_ServiciuID" Association="Self.FK_dbo_ServiciuProceduras_dbo_Servicius_Serviciu_ServiciuID">
+            <End Role="Servicius" EntitySet="Servicius" />
+            <End Role="ServiciuProceduras" EntitySet="ServiciuProceduras" />
+          </AssociationSet>
+          <EntitySet Name="AspNetRoles" EntityType="Model.AspNetRole" />
+          <EntitySet Name="AspNetUsers" EntityType="Model.AspNetUser" />
+          <AssociationSet Name="FK_dbo_Programares_dbo_AspNetUsers_ApplicationUser_Id" Association="Model.FK_dbo_Programares_dbo_AspNetUsers_ApplicationUser_Id">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Programare" EntitySet="Programares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Programares_dbo_AspNetUsers_ApplicationUser1_Id" Association="Model.FK_dbo_Programares_dbo_AspNetUsers_ApplicationUser1_Id">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Programare" EntitySet="Programares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Testimonials_dbo_AspNetUsers_ApplicationUser_Id" Association="Model.FK_dbo_Testimonials_dbo_AspNetUsers_ApplicationUser_Id">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Testimonial" EntitySet="Testimonials" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Model.AspNetUserRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Model.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Nume" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Prenume" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Programares" Relationship="Model.FK_dbo_Programares_dbo_AspNetUsers_ApplicationUser_Id" FromRole="AspNetUser" ToRole="Programare" />
+          <NavigationProperty Name="Programares1" Relationship="Model.FK_dbo_Programares_dbo_AspNetUsers_ApplicationUser1_Id" FromRole="AspNetUser" ToRole="Programare" />
+          <NavigationProperty Name="Testimonials" Relationship="Model.FK_dbo_Testimonials_dbo_AspNetUsers_ApplicationUser_Id" FromRole="AspNetUser" ToRole="Testimonial" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Model.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+        </EntityType>
+        <Association Name="FK_dbo_Programares_dbo_AspNetUsers_ApplicationUser_Id">
+          <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="Model.Programare" Role="Programare" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Programare">
+              <PropertyRef Name="ApplicationUser_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Programares_dbo_AspNetUsers_ApplicationUser1_Id">
+          <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="Model.Programare" Role="Programare" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Programare">
+              <PropertyRef Name="ApplicationUser1_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Testimonials_dbo_AspNetUsers_ApplicationUser_Id">
+          <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="Model.Testimonial" Role="Testimonial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Testimonial">
+              <PropertyRef Name="ApplicationUser_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="Model.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="StomaEntities">
+          <EntitySetMapping Name="Proceduras">
+            <EntityTypeMapping TypeName="Model.Procedura">
+              <MappingFragment StoreEntitySet="Proceduras">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+                <ScalarProperty Name="Pret" ColumnName="Pret" />
+                <ScalarProperty Name="Descriere" ColumnName="Descriere" />
+                <ScalarProperty Name="Durata" ColumnName="Durata" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Programares">
+            <EntityTypeMapping TypeName="Model.Programare">
+              <MappingFragment StoreEntitySet="Programares">
+                <ScalarProperty Name="ProgramareID" ColumnName="ProgramareID" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="PacientAnonim" ColumnName="PacientAnonim" />
+                <ScalarProperty Name="ApplicationUser_Id" ColumnName="ApplicationUser_Id" />
+                <ScalarProperty Name="ApplicationUser1_Id" ColumnName="ApplicationUser1_Id" />
+                <ScalarProperty Name="ServiciuProcedura_ServiciuProceduraID" ColumnName="ServiciuProcedura_ServiciuProceduraID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiciuProceduras">
+            <EntityTypeMapping TypeName="Model.ServiciuProcedura">
+              <MappingFragment StoreEntitySet="ServiciuProceduras">
+                <ScalarProperty Name="ServiciuProceduraID" ColumnName="ServiciuProceduraID" />
+                <ScalarProperty Name="Procedura_Id" ColumnName="Procedura_Id" />
+                <ScalarProperty Name="Serviciu_ServiciuID" ColumnName="Serviciu_ServiciuID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Servicius">
+            <EntityTypeMapping TypeName="Model.Serviciu">
+              <MappingFragment StoreEntitySet="Servicius">
+                <ScalarProperty Name="ServiciuID" ColumnName="ServiciuID" />
+                <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+                <ScalarProperty Name="Descriere" ColumnName="Descriere" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Testimonials">
+            <EntityTypeMapping TypeName="Model.Testimonial">
+              <MappingFragment StoreEntitySet="Testimonials">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Descriere" ColumnName="Descriere" />
+                <ScalarProperty Name="Validat" ColumnName="Validat" />
+                <ScalarProperty Name="ApplicationUser_Id" ColumnName="ApplicationUser_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="Model.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="Model.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Prenume" ColumnName="Prenume" />
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUser">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
