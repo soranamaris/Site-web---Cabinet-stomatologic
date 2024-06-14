@@ -1,17 +1,31 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<h2 style="text-align: center;">@ViewBag.Title</h2>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<div class="row" style="margin-top: 20px;">
+    <div class="col-md-6" style="padding-right: 30px;">
+        <h3 style="color: #2a6496;">Ne-ar plăcea să vă cunoaștem!</h3>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+        <address style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+            <strong style="color: #333; font-size: 18px;">Stoma Dent Clinic</strong><br />
+            Calea Florești Nr. 16<br />
+            400000 Cluj-Napoca, România<br />
+            <abbr title="Phone" style="color: #555; font-weight: bold;">Tel:</abbr> 031 200 70 30
+        </address>
+
+        <address>
+            <strong style="color: #333; font-size: 18px;">Email:</strong>
+            <a href="mailto:office@stomadent.ro" style="text-decoration: none; color: #2a6496;">office@stomadent.ro</a><br />
+        </address>
+
+        <div style="font-weight: bold; font-size: 18px; margin-bottom: 5px;">Orar:</div>
+        <div>Luni-Vineri: 9:00 - 22:00</div>
+        <div>Sâmbătă: Închis</div>
+        <div>Duminică: Închis</div>
+    </div>
+    <div class="col-md-6" style="padding-left: 30px;">
+        <!-- Adaugă aici harta Google Maps -->
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2743.683538075427!2d24.555817075863658!3d46.55394666007405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x474bb63ac8b4d425%3A0x833ada414c898360!2sStomaDent!5e0!3m2!1sro!2sro!4v1712406969204!5m2!1sro!2sro" width="600" height="450" style="border:0; border-radius: 5px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+</div>

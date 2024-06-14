@@ -15,12 +15,17 @@ namespace Licenta1.Models
         public string Pacient_Id { get; set; }
 
         public IEnumerable<SelectListItem> ServiciuProcedura { get; set; }
+        public IEnumerable<SelectListItem> Manager { get; set; }
 
         public IEnumerable<SelectListItem> Ora { get; set; }
 
         public string SelectedProcedure { get; set; }
+        public IEnumerable<SelectListItem> SelectedManager { get; set; }
 
         public string SelectedHour { get; set; }
-               
+        public IEnumerable<SelectListItem> Doctors { get; set; }
+
+        public string Doctor_Id { get; set; }
+
     }
 }

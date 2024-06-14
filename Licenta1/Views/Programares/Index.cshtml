@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<Licenta1.Programare>
+@using Microsoft.AspNet.Identity
 
 @{
     ViewBag.Title = "Index";
+    var currentUserId = User.Identity.GetUserId();
 }
 
 <h2>Index</h2>
@@ -18,7 +20,7 @@
             @Html.DisplayNameFor(model => model.PacientAnonim)
         </th>
         <th>
-           
+
             @Html.DisplayNameFor(model => model.ApplicationUser_Id)
         </th>
         <th>
@@ -30,29 +32,100 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Data)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PacientAnonim)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AspNetUser.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AspNetUser1.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ServiciuProcedura.Procedura.Denumire)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProgramareID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProgramareID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProgramareID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        if (User.IsInRole("Pacient") && item.ApplicationUser_Id == currentUserId)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PacientAnonim)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AspNetUser.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AspNetUser1.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServiciuProcedura.Procedura.Denumire)
+                </td>
+                <td>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+                    {
+                        @Html.ActionLink("Edit|", "Edit", new { id = item.ProgramareID })
+                        @Html.ActionLink("Details|", "Details", new { id = item.ProgramareID })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ProgramareID })
+                    }
+                </td>
+            </tr>
+        }
+
+
+
+        else if (User.IsInRole("Admin"))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PacientAnonim)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AspNetUser.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AspNetUser1.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServiciuProcedura.Procedura.Denumire)
+                </td>
+                <td>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+                    {
+                        @Html.ActionLink("Edit|", "Edit", new { id = item.ProgramareID })
+                        @Html.ActionLink("Details|", "Details", new { id = item.ProgramareID })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ProgramareID })
+                    }
+                </td>
+            </tr>
+        }
+
+
+        else if (User.IsInRole("Manager") && item.ApplicationUser1_Id == currentUserId)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PacientAnonim)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AspNetUser.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AspNetUser1.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServiciuProcedura.Procedura.Denumire)
+                </td>
+                <td>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+                    {
+                        @Html.ActionLink("Edit|", "Edit", new { id = item.ProgramareID })
+                        @Html.ActionLink("Details|", "Details", new { id = item.ProgramareID })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ProgramareID })
+                    }
+                </td>
+            </tr>
+        }
+
+
+
+    }
 
 </table>

@@ -1,6 +1,8 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+@Styles.Render("~/Content/css")
+<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
 
 <!--<div class="jumbotron">
     <h1>ASP.NET</h1>
@@ -11,32 +13,57 @@
 
 <div style="position: relative; text-align: center; color: white;">
     <!-- Imaginea Hero -->
-    <img src="~/Images/stomatologie1.jpg" alt="Imagine stânga" style="width: 100%; height: 400px;">
+    <img src="~/Images/Stoma_Dent.jpeg" style="width: 1150px; height: 500px; border-radius: 10px;">
 
     <!-- Textul peste imagine -->
-    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);background: rgba(255, 255, 255, 0.7); padding: 20px; border-radius: 10px;">
+    <!--<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);background: rgba(255, 255, 255, 0.7); padding: 20px; border-radius: 10px;">
         <h1 style="color: #007bff;">Bine ai venit la Stoma Dent!</h1>
         <p style="color: #007bff;">Profesionalism și calitate pentru zâmbetul tău.</p>
 
-    </div>
+    </div>-->
 </div>
 @*<div class="col-sm-2">
-    <img src="~/Images/stomatologie1.jpg" alt="Imagine stânga" style="float: right; margin-right: 10px; width: 360px; height: 450px; padding: 20px;">
+        <img src="~/Images/stomatologie1.jpg" alt="Imagine stânga" style="float: right; margin-right: 10px; width: 360px; height: 450px; padding: 20px;">
 
-</div>*@
+    </div>*@
 
-<br/>
-<br/>
+<br />
+<br />
 <div class="col-sm-12">
     <div style="text-align: center;">
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="menu-title">Meniu Administrator</div>
+            <div style="text-align: center;">
+                <a href="@Url.Action("Index", "ApplicationUsers")" class="menu-link link-admin">Gestionare conturi</a>
 
-        <div style="display: inline-block; text-align: left; background-color:aquamarine; border-radius: 10px; padding: 10px; margin-bottom: 20px;">
-            @Html.ActionLink("Lista de proceduri", "Index", "Proceduras")<br />
-            @Html.ActionLink("Lista de servicii", "Index", "Servicius")<br />
-            @Html.ActionLink("Lista de testimoniale", "Index", "Testimonials")<br />
-            @Html.ActionLink("Lista de programari", "Index", "Programares")<br />
-            @Html.ActionLink("Lista de servicii si proceduri aferente", "Index", "ServiciuProceduras")<br />
-        </div>
+            </div>
+        }
+        @if (User.IsInRole("Manager"))
+        {
+            <div class="menu-title">Meniu Medic</div>
+
+            <div style="text-align: center;">
+                <a href="@Url.Action("Index", "Proceduras")" class="menu-link link-proceduri">Lista de proceduri</a>
+
+                <a href="@Url.Action("Index", "Servicius")" class="menu-link link-servicii">Lista de servicii</a>
+
+                <a href="@Url.Action("Index", "Testimonials")" class="menu-link link-testimoniale">Lista de testimoniale</a>
+
+                <a href="@Url.Action("Index", "Programares")" class="menu-link link-programari">Lista de programari</a>
+
+                <a href="@Url.Action("Index", "ServiciuProceduras")" class="menu-link link-servicii-proceduri">Servicii și proceduri aferente</a>
+            </div>
+        }
+        @if (User.IsInRole("Pacient"))
+        {
+            <div class="menu-title">Meniu Pacient</div>
+            <div style="text-align: center;">
+                <a href="@Url.Action("Index", "Testimonials")" class="menu-link link-pacient">Lista de testimoniale</a>
+                <a href="@Url.Action("Index", "Programares")" class="menu-link link-pacient">Lista de programari</a>
+                <!-- Adaugă aici alte linkuri pentru Pacient dacă este necesar -->
+            </div>
+        }
     </div>
 
     <div style="max-width: 900px; margin: 0 auto; padding: 20px;">
@@ -67,8 +94,8 @@
 
 
 @*<div class="col-sm-2">
-    <img src="~/Images/Stoma.png" alt="Imagine dreapta" style="float: left; margin-left: 10px; width: 360px; height: 450px; padding: 20px;">
-</div>*@
+        <img src="~/Images/Stoma.png" alt="Imagine dreapta" style="float: left; margin-left: 10px; width: 360px; height: 450px; padding: 20px;">
+    </div>*@
 
 <!--<div class="row">
     <div class="col-md-4">

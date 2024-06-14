@@ -10,6 +10,7 @@ using Licenta1.Models;
 
 namespace Licenta1.Controllers
 {
+   
     public class TestimonialsController : Controller
     {
         /*private ApplicationDbContext db = new ApplicationDbContext()*/
@@ -22,6 +23,7 @@ namespace Licenta1.Controllers
         }
 
         // GET: Testimonials/Details/5
+
         public ActionResult Details(int? id)
         {
             if (id == null)

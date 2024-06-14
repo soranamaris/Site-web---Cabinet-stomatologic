@@ -3,60 +3,44 @@
     ViewBag.Title = "Înregistrează-te";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2 style="font-family: 'Arial', sans-serif; color: #333; text-align: center;">@ViewBag.Title</h2>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", style = "max-width: 600px; margin: auto; padding: 15px; border-radius: 8px; background-color: #f7f7f7; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Crează un nou cont</h4>
-    <hr />
+    <h4 style="text-align: center; color: #555;">Crează un nou cont</h4>
+    <hr style="border-top: 1px solid #ddd;" />
     @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Nume, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Nume, new { @class = "form-control" })
-        </div>
+    <div style="margin-bottom: 15px;">
+        @Html.LabelFor(m => m.Nume, new { style = "text-align: right; width: 20%; float: left; margin-right: 10px;" })
+        @Html.TextBoxFor(m => m.Nume, new { @class = "form-control", style = "width: 75%;" })
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Prenume, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Prenume, new { @class = "form-control" })
-        </div>
+    <div style="clear: both; margin-bottom: 15px;">
+        @Html.LabelFor(m => m.Prenume, new { style = "text-align: right; width: 20%; float: left; margin-right: 10px;" })
+        @Html.TextBoxFor(m => m.Prenume, new { @class = "form-control", style = "width: 75%;" })
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-        </div>
+    <div style="clear: both; margin-bottom: 15px;">
+        @Html.LabelFor(m => m.UserName, new { style = "text-align: right; width: 20%; float: left; margin-right: 10px;" })
+        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", style = "width: 75%;" })
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
-        </div>
+    <div style="clear: both; margin-bottom: 15px;">
+        @Html.LabelFor(m => m.PhoneNumber, new { style = "text-align: right; width: 20%; float: left; margin-right: 10px;" })
+        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", style = "width: 75%;" })
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
+    <div style="clear: both; margin-bottom: 15px;">
+        @Html.LabelFor(m => m.Email, new { style = "text-align: right; width: 20%; float: left; margin-right: 10px;" })
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", style = "width: 75%;" })
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password,"Parola", new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
+    <div style="clear: both; margin-bottom: 15px;">
+        @Html.LabelFor(m => m.Password, "Parola", new { style = "text-align: right; width: 20%; float: left; margin-right: 10px;" })
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control", style = "width: 75%;" })
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword,"Confirmă parola", new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
+    <div style="clear: both; margin-bottom: 15px;">
+        @Html.LabelFor(m => m.ConfirmPassword, "Confirmă parola", new { style = "text-align: right; width: 20%; float: left; margin-right: 10px;" })
+        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", style = "width: 75%;" })
     </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Trimite" />
-        </div>
+    <div style="clear: both; margin-top: 20px; text-align: center;">
+        <input type="submit" class="btn btn-default" value="Trimite" style="padding: 10px 25px; background-color: #007bff; border-color: #4cae4c; color: white; border-radius: 4px; cursor: pointer;" />
     </div>
 }
 

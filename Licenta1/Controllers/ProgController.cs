@@ -7,11 +7,12 @@ using System.Data.Entity;
 using Microsoft.AspNet.Identity;
 using Licenta1.Models;
 using System.Collections;
-
+using Licenta1.Services;
 namespace Licenta1.Controllers
 {
     public class ProgController : Controller
     {
+        private readonly Services.EmailService emailService = new Services.EmailService();
         // GET: Prog
         private StomaEntities db = new StomaEntities();
         private IEnumerable<SelectListItem> _allhours = new List<SelectListItem>()
@@ -95,6 +96,12 @@ namespace Licenta1.Controllers
             prog.ServiciuProcedura = x;
             prog.Data = DateTime.Now;
             prog.Ora = _allhours;
+            // Obține doar utilizatorii care sunt doctori
+            var doctorRoleId = db.AspNetRoles.Where(r => r.Name == "Manager").Select(r => r.Id).FirstOrDefault();
+            var doctors = db.AspNetUsers.Where(u => u.AspNetRoles.Any(r => r.Id == doctorRoleId)).ToList();
+
+            prog.Doctors = new SelectList(doctors, "Id", "UserName");
+            ViewBag.Success = TempData["Success"] as string;
 
             return View(prog);
 
@@ -111,7 +118,7 @@ namespace Licenta1.Controllers
 
 
         [HttpPost]
-        public ActionResult SaveProg([Bind(Include = "Data, Pacient_Id,Ora, SelectedHour,SelectedProcedure,ServiciuProcedura")]ProgViewModel vm, int? hour)
+        public ActionResult SaveProg([Bind(Include = "Data, Pacient_Id,Ora, SelectedHour,SelectedProcedure,ServiciuProcedura, Doctor_Id")]ProgViewModel vm, int? hour)
         {
             //var i = 10;
 
@@ -129,14 +136,33 @@ namespace Licenta1.Controllers
                 Data = vm.Data.AddHours(Convert.ToDouble(vm.SelectedHour)),
                 PacientAnonim = "NU",
                 ApplicationUser_Id = User.Identity.GetUserId(),
-                ApplicationUser1_Id = "8e3947a8-9182-4347-be1e-9d7dab65ef85",       //doctor
+                ApplicationUser1_Id = vm.Doctor_Id,       //doctor
                 ServiciuProcedura_ServiciuProceduraID = Convert.ToInt32(vm.SelectedProcedure) 
             };
 
             db.Programares.Add(newProgramare);
             db.SaveChanges();
-            
-            base.ViewBag.Success = "Programare cu success!";
+
+            var userId = User.Identity.GetUserId();
+            if (!string.IsNullOrEmpty(userId))
+            {
+                var user = db.AspNetUsers.FirstOrDefault(u => u.Id == userId);
+                if (user != null)
+                {
+                    var doctor = db.AspNetUsers.FirstOrDefault(u => u.Id == vm.Doctor_Id);
+
+                    ReminderEmailModel reminderEmailModel = new ReminderEmailModel
+                    {
+                        ToEmail = user.Email,
+                        Subject = "Confirmare programare",
+                        Body = $"Bună ziua!\n\nVă mulțumim că ați ales clinica Stoma Dent.\n\nDoamna doctor {doctor.UserName} vă așteaptă în data de {newProgramare.Data.ToString("dd/MM/yyyy")} pentru programare.\n\nO zi frumoasă,\n\nEchipa Stoma Dent"
+                    };
+                    emailService.SendEmail(reminderEmailModel);
+                }
+            }
+
+            //base.ViewBag.Success = "Programare cu success!";
+            TempData["Success"] = "Programare cu succes!";
 
             return RedirectToAction("Index");
         }

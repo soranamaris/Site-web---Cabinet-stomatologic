@@ -26,3 +26,61 @@ textarea {
 .title {
     color:teal;
 }
+
+.menu-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 30px; /* Dimensiune mai mare pentru titlu */
+    
+}
+
+.menu-link {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    padding: 30px; /* Padding mai mare pentru dimensiuni mai mari */
+    margin: 10px; /* Spațiu mai mare între chenare */
+    border-radius: 10px;
+    width: 170px; /* Lățime mai mare pentru chenare */
+    height: 170px; /* Înălțime mai mare pentru a menține forma de pătrat */
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    font-size: 20px; /* Mărime mai mare pentru text */
+    vertical-align: top;
+}
+    
+
+.menu-link:hover {
+    transform: scale(1.05);
+}
+
+/* Clase pentru culorile specifice */
+.link-proceduri {
+    background-color: #23C7D2; /* culoarea pentru proceduri */
+}
+
+.link-servicii {
+    background-color: #3F9CFF; /* culoarea pentru servicii */
+}
+
+.link-testimoniale {
+    background-color: #D9CBFE; /* culoarea pentru testimoniale */
+}
+
+.link-programari {
+    background-color: #F5775B; /* culoarea pentru programari */
+    
+}
+
+.link-servicii-proceduri {
+    background-color: #C3EE70; /* culoarea pentru serviciu proceduri */
+    
+}
+.link-admin {
+    background-color: #ca9ad9; /* Turquoise pentru Admin */
+}
+
+.link-pacient {
+    background-color: #e83e8c; /* Pink pentru Pacient */
+}

@@ -9,6 +9,7 @@
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <meta name="description" content="The description of my page" />
 </head>
+
 <body style="background-color:white">
     <br />
     <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: lightskyblue">
@@ -19,17 +20,21 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Stoma Dent", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @*@Html.ActionLink("Stoma Dent", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+                <a class="navbar-brand" href="@Url.Action("Index", "Home") ">
+                  
+                </a>
             </div>
             <div class="navbar-collapse collapse" style="background-color:lightskyblue">
                 <ul class="nav navbar-nav">
+                    <li> <img src="~/Images/Logo.jpeg" alt="Logo-ul Companiei" style="height:70px;border-radius: 10px;"></li>
                     <li>@Html.ActionLink("Acasa", "Index", "Home")</li>
                     <li>@Html.ActionLink("Despre noi", "About", "Home")</li>
                     <li>@Html.ActionLink("Servicii", "Servicii", "Servicii")</li>
                     <li>@Html.ActionLink("Tarife", "Tarife", "Tarife")</li>
                     <li>@Html.ActionLink("Testimoniale", "Testimoniale", "Testimoniale")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li class="btn btn-primary btn-lg" style="background-color:skyblue">@Html.ActionLink("Programare", "Index", "Prog")</li>
+                    <li>@Html.ActionLink("Programare", "Index", "Prog")</li>
 
                 </ul>
                 @Html.Partial("_LoginPartial")

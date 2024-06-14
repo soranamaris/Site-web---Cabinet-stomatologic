@@ -34,83 +34,54 @@
 <br />
 <br />
 
-<h2>Programare nouă</h2>
+<h2 style="text-align: center; margin-top: 20px; font-family: Arial, sans-serif; color: #4A4A4A;">Programare nouă</h2>
 
-<h3>@ViewBag.Success</h3>
-@using (Html.BeginForm("SaveProg", "Prog", new { hour = "javascript:getHour();" }, FormMethod.Post))
+@if (!string.IsNullOrEmpty(ViewBag.Success))
+{
+    
+    <div class="alert alert-success">
+        @ViewBag.Success
+    </div>
+}
+
+@using (Html.BeginForm("SaveProg", "Prog", FormMethod.Post, new { @style = "max-width: 600px; margin: 30px auto; background-color: #f8f9fa; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);" }))
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        @*<h4>Programare</h4>*@
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Data,"Alege data programării*", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Data, new { htmlAttributes = new { @class = "form-control" }, onchange = "OnChangeEvent()" })
-                @Html.ValidationMessageFor(model => model.Data, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <div style="margin-bottom: 15px;">
+        @Html.LabelFor(model => model.Data, "Alege data programării", new { @style = "display: block; font-weight: bold; margin-bottom: 5px;" })
+        @Html.EditorFor(model => model.Data, new { htmlAttributes = new { @class = "form-control", @style = "width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 4px;" } })
+        @Html.ValidationMessageFor(model => model.Data, "", new { @class = "text-danger" })
+    </div>
 
-       
-            
-            @*Html.LabelFor(model => model, "Ora", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.Ora, Model.Ora, "Select", new { id = "ore" })
-                    @Html.ValidationMessageFor(model => model.Ora, "", new { @class = "text-danger" })
-                </div>*@
-        <div class="form-group">
-            @Html.LabelFor(model => model, "Alege ora*", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.SelectedHour, Model.Ora, "Selectează ora disponibilă", new { id = "ore" })
-                @Html.ValidationMessageFor(model => model.Ora, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <div style="margin-bottom: 15px;">
+        @Html.LabelFor(model => model.SelectedHour, "Alege ora", new { @style = "display: block; font-weight: bold; margin-bottom: 5px;" })
+        @Html.DropDownListFor(model => model.SelectedHour, Model.Ora, "Selectează ora disponibilă", new { @id = "ore", @style = "width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 4px;" })
+        @Html.ValidationMessageFor(model => model.SelectedHour, "", new { @class = "text-danger" })
+    </div>
 
+    <div style="margin-bottom: 15px;">
+        @Html.LabelFor(model => model.Doctor_Id, "Alege Doctor", new { @style = "display: block; font-weight: bold; margin-bottom: 5px;" })
+        @Html.DropDownListFor(model => model.Doctor_Id, Model.Doctors, "Selectează un doctor", new { @id = "doctor", @style = "width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 4px;" })
+        @Html.ValidationMessageFor(model => model.Doctor_Id, "", new { @class = "text-danger" })
+    </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model, "Alege procedura*", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.SelectedProcedure, Model.ServiciuProcedura, "Selectează procedura")
-                    @Html.ValidationMessageFor(model => model.ServiciuProcedura, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
+    <div style="margin-bottom: 15px;">
+        @Html.LabelFor(model => model.SelectedProcedure, "Alege procedura", new { @style = "display: block; font-weight: bold; margin-bottom: 5px;" })
+        @Html.DropDownListFor(model => model.SelectedProcedure, Model.ServiciuProcedura, "Selectează procedura", new { @style = "width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 4px;" })
+        @Html.ValidationMessageFor(model => model.SelectedProcedure, "", new { @class = "text-danger" })
+    </div>
 
-        <div class="form-group">
-            @* <div class="form-group">
-                    @Html.LabelFor(model => model, "Ora", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("Ora")
-
-                    </div>
-                </div>*@
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Trimite" class="btn btn-default" />
-                </div>
-            </div>
-        </div>
-
-    @*foreach (var item in ViewBag.ore)
-        {
-            @item
-        }*@
-
-
+    <div style="text-align: center;">
+        <input type="submit" value="Trimite" style="padding: 10px 25px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;" />
+    </div>
 }
-<br />
-<br />
-<br />
-<div>
-    <br />
-    <br />
 
-    @Html.ActionLink("Înapoi la pagina principală", "Index")
-</div>
+@*<div style="text-align: center; margin-top: 30px;">
+        @Html.ActionLink("Înapoi la pagina principală", "Index", null, new { @style = "color: #007bff; text-decoration: none;" })
+    </div>*@
 
 
 @section Scripts {
