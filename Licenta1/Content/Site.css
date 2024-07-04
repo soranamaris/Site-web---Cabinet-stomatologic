@@ -1,5 +1,5 @@
-﻿body {
-    padding-top: 50px;
+﻿﻿body {
+    padding-top: 10px;
     padding-bottom: 20px;
 }
 
@@ -84,3 +84,6 @@ textarea {
 .link-pacient {
     background-color: #e83e8c; /* Pink pentru Pacient */
 }
+
+
+

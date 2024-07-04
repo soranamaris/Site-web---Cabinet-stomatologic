@@ -27,7 +27,7 @@ namespace Licenta1.Controllers
                 PhoneNumber=user.PhoneNumber,
                 Email = user.Email,
                 UserName = user.UserName
-                // Copiază și completează restul proprietăților necesare
+                
             }).ToList();
             return View(applicationUsers);
             
@@ -52,7 +52,7 @@ namespace Licenta1.Controllers
                 PhoneNumber = aspNetUser.PhoneNumber,
                 Email = aspNetUser.Email,
                 UserName = aspNetUser.UserName
-                // și așa mai departe pentru celelalte proprietăți
+                
             };
             return View(user);
         }
@@ -100,7 +100,7 @@ namespace Licenta1.Controllers
                 PhoneNumber = aspNetUser.PhoneNumber,
                 Email = aspNetUser.Email,
                 UserName = aspNetUser.UserName
-                // și așa mai departe pentru celelalte proprietăți
+               
             };
             return View(user);
         }
@@ -152,7 +152,7 @@ namespace Licenta1.Controllers
                 PhoneNumber = aspNetUser.PhoneNumber,
                 Email = aspNetUser.Email,
                 UserName = aspNetUser.UserName
-                // și așa mai departe pentru celelalte proprietăți
+                
             };
             return View(user);
         }

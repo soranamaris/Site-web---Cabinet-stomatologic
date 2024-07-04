@@ -1,31 +1,35 @@
 ﻿@model Licenta1.Models.ProgViewModel
+<br />
+<br />
+<br />
+<br />
 @{
     ViewBag.Title = "Programare";
 }
 
 <script type="text/javascript" language="javascript">
     $(document).ready(function () {
-        //your code here
+        $('#Data, #doctor').change(function () {
+            var date = $('#Data').val();
+            var applicationUser1_Id = $('#doctor').val();
 
-        $('#Data').change(function () {
-            //    alert('Changed!');
-            var par = $(this).val();
-            $.getJSON('/prog/filteredvalues', { date: par }, function (result) {
-                var ddl = $('#ore');
-                ddl.empty();
-                $(result).each(function () {
-                    $(document.createElement('option'))
-                        .attr('value', this.Value)
-                        .text(this.Text)
-                        .appendTo(ddl);
+            if (date && applicationUser1_Id) {
+                $.getJSON('/prog/filteredvalues', { date: date, applicationUser1_Id: applicationUser1_Id }, function (result) {
+                    var ddl = $('#ore');
+                    ddl.empty();
+                    $(result).each(function () {
+                        $('<option>')
+                            .attr('value', this.Value)
+                            .text(this.Text)
+                            .appendTo(ddl);
+                    });
                 });
-            });
+            }
         });
 
         function getHour() {
             alert('ore');
         }
-
     });
 
 
@@ -38,7 +42,7 @@
 
 @if (!string.IsNullOrEmpty(ViewBag.Success))
 {
-    
+
     <div class="alert alert-success">
         @ViewBag.Success
     </div>
@@ -55,17 +59,15 @@
         @Html.EditorFor(model => model.Data, new { htmlAttributes = new { @class = "form-control", @style = "width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 4px;" } })
         @Html.ValidationMessageFor(model => model.Data, "", new { @class = "text-danger" })
     </div>
-
-    <div style="margin-bottom: 15px;">
-        @Html.LabelFor(model => model.SelectedHour, "Alege ora", new { @style = "display: block; font-weight: bold; margin-bottom: 5px;" })
-        @Html.DropDownListFor(model => model.SelectedHour, Model.Ora, "Selectează ora disponibilă", new { @id = "ore", @style = "width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 4px;" })
-        @Html.ValidationMessageFor(model => model.SelectedHour, "", new { @class = "text-danger" })
-    </div>
-
     <div style="margin-bottom: 15px;">
         @Html.LabelFor(model => model.Doctor_Id, "Alege Doctor", new { @style = "display: block; font-weight: bold; margin-bottom: 5px;" })
         @Html.DropDownListFor(model => model.Doctor_Id, Model.Doctors, "Selectează un doctor", new { @id = "doctor", @style = "width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 4px;" })
         @Html.ValidationMessageFor(model => model.Doctor_Id, "", new { @class = "text-danger" })
+    </div>
+    <div style="margin-bottom: 15px;">
+        @Html.LabelFor(model => model.SelectedHour, "Alege ora", new { @style = "display: block; font-weight: bold; margin-bottom: 5px;" })
+        @Html.DropDownListFor(model => model.SelectedHour, Model.Ora, "Selectează ora disponibilă", new { @id = "ore", @style = "width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 4px;" })
+        @Html.ValidationMessageFor(model => model.SelectedHour, "", new { @class = "text-danger" })
     </div>
 
     <div style="margin-bottom: 15px;">

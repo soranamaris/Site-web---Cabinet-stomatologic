@@ -31,45 +31,43 @@ namespace Licenta1.Controllers
             new SelectListItem() { Text = "20:00", Value = "20" },
         };
 
-        public ActionResult FilteredValues(DateTime date)
+        public ActionResult FilteredValues(DateTime date , string applicationUser1_Id)
         {
+#pragma warning disable
 
-
-            #pragma warning disable
-
+            // Obținerea programărilor pentru data și doctorul specificat
             var occupiedRows = db.Programares.Where(x => x.Data.Year == date.Year &&
-                                                       x.Data.Month == date.Month && 
-                                                       x.Data.Day == date.Day);
-            var occupiedHours = occupiedRows.Select(x => new SelectListItem() {
-                Text = x.Data.Hour.ToString() + ":00",
-                Value = x.Data.Hour.ToString()                    
-            });
+                                                         x.Data.Month == date.Month &&
+                                                         x.Data.Day == date.Day &&
+                                                         x.ApplicationUser1_Id== applicationUser1_Id
+                                                    ).ToList();
 
-            //IEnumerable<SelectListItem> hours = _allhours.Excepat(occupiedHours);
+            // Selectarea orelor ocupate
+            var occupiedHours = occupiedRows.Select(x => new SelectListItem()
+            {
+                Text = x.Data.Hour.ToString("00") + ":00",
+                Value = x.Data.Hour.ToString()
+            }).ToList();
+
+            // Presupunem că _allhours este o listă de SelectListItem cu toate orele posibile într-o zi
             var allhours = _allhours.ToList();
 
+            // Eliminarea orelor ocupate din lista tuturor orelor disponibile
             foreach (var item in occupiedHours)
             {
-                var toRemove = allhours.First(x => x.Value == item.Value);
-                allhours.Remove(toRemove);
+                var toRemove = allhours.FirstOrDefault(x => x.Value == item.Value);
+                if (toRemove != null)
+                {
+                    allhours.Remove(toRemove);
+                }
             }
 
+            // Returnarea orelor disponibile sub formă de JSON
             return Json(allhours, JsonRequestBehavior.AllowGet);
-            
-
-
-            //din db a venit
-            //    IEnumerable<SelectListItem> occupiedhours = new List<SelectListItem>()
-            //{
-            //    new SelectListItem() { Text = "14:00", Value = "14" },
-            //    new SelectListItem() { Text = "15:00", Value = "15" }
-            //};
-
-            //rezultat final -> ALL HOURS - OCCUPIED
-
-            //new SelectListItem() { Text = "16:00", Value = "16" },
-            //new SelectListItem() { Text = "17:00", Value = "17" },
         }
+
+
+
 
         public ActionResult Index()
         {
